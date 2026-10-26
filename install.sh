@@ -57,7 +57,14 @@ install_packages() {
 		if pkg_installed "$pkg"; then
 			print_log -g "[SKIP]  " -wt "$pkg (already installed)"
 		else
-			if sudo "$helper" -S --noconfirm "$pkg" 2>&1; then
+			if [[ "$helper" == "yay" ]]; then
+				if yay -S --noconfirm "$pkg" 2>&1; then
+					print_log -g "[OK]    " -wt "$pkg"
+					installed=$((installed + 1))
+				else
+					print_log -err "[FAIL]  " -r "$pkg — Try: yay -S $pkg manually"
+				fi
+			elif sudo "$helper" -S --noconfirm "$pkg" 2>&1; then
 				print_log -g "[OK]    " -wt "$pkg"
 				installed=$((installed + 1))
 			else
