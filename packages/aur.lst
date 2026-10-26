@@ -1,0 +1,21 @@
+# AUR packages to be installed via yay
+# Add more packages as needed, one per line
+
+# --------------------------------------------------- // Window Manager
+wlogout                                                # Logout menu
+noctalia-greeter                                       # Login manager (greeterd fork)
+
+# --------------------------------------------------- // Apps
+pear-desktop-bin                                       # YouTube Music client
+vesktop                                                # Discord client with Vencord
+
+# --------------------------------------------------- // Terminal
+oh-my-zsh-git                                          # ZSH config/plugins manager
+zsh-theme-powerlevel10k-git                            # Powerlevel10k terminal theme
+pacseek                                                # Pacman/AUR TUI helper
+
+# --------------------------------------------------- // Utilities
+protonup-qt                                            # Proton GUI manager
+wl-screenrec                                           # Screen recorder for wlroots compositors
+code-marketplace                                       # VS Code OSS marketplace support
+code-features                                          # Additional VS Code features

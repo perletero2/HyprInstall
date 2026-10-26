@@ -1,0 +1,21 @@
+# Optional extra packages - edit before install
+# Add packages as needed, one per line
+
+# --------------------------------------------------- // Apps
+keepassxc                                              # Password manager
+ncdu                                                   # Disk usage analyzer
+ripgrep-all                                            # Ripgrep + PDF/file search
+yt-dlp                                                 # YouTube downloader CLI
+zoxide                                                 # Smarter cd command
+
+# --------------------------------------------------- // Gaming
+lutris                                                 # Lutris game launcher
+steam                                                  # Steam
+gamemode                                               # Game optimization daemon
+mangohud                                               # System performance overlay
+
+# --------------------------------------------------- // Music
+mpd                                                    # MPD music server
+mpd-mpris                                              # MPRIS integration for MPD
+rmpc                                                   # MPD TUI client
+cava                                                   # Audio visualizer

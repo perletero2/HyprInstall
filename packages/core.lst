@@ -1,0 +1,84 @@
+# Core packages to be installed via pacman
+# Add more packages as needed, one per line
+
+# --------------------------------------------------- // System
+hyprland                                               # Hyprland compositor
+noctalia                                               # Noctalia desktop shell (bars, tray, widgets)
+uwsm                                                   # Standalone Wayland session manager
+pipewire                                               # Audio/video server
+pipewire-alsa                                          # PipeWire ALSA client
+pipewire-audio                                         # PipeWire audio client
+pipewire-jack                                          # PipeWire JACK client
+pipewire-pulse                                         # PipeWire PulseAudio client
+gst-plugin-pipewire                                    # PipeWire GStreamer plugin
+wireplumber                                            # PipeWire session manager
+pavucontrol                                            # PulseAudio volume control
+pamixer                                                # PulseAudio CLI mixer
+networkmanager                                         # Network manager
+network-manager-applet                                 # Network manager system tray utility
+bluez                                                  # Bluetooth protocol stack
+bluez-utils                                            # Bluetooth CLI utilities
+blueman                                                # Bluetooth manager GUI
+brightnessctl                                          # Screen brightness control
+playerctl                                              # Media controls
+udiskie                                                # Removable media management
+
+# --------------------------------------------------- // Display & WM tools
+awww                                                   # Wallpaper manager
+hyprlock                                               # Lock screen
+grim                                                   # Screenshot tool
+hyprpicker                                             # Color picker
+slurp                                                  # Region select for screenshots/screenshare
+satty                                                  # Screenshot annotation
+cliphist                                               # Clipboard manager
+wl-clip-persist                                        # Persistent Wayland clipboard
+hyprsunset                                             # Blue light filter
+hypridle                                               # Idle daemon
+hyprpolkitagent                                        # Polkit authentication agent
+xdg-desktop-portal-hyprland                            # XDG desktop portal for Hyprland
+xdg-desktop-portal-gtk                                 # File picker and D-Bus integration
+xdg-user-dirs                                          # User directories (~/Desktop, ~/Music, etc.)
+xdg-utils                                              # XDG utilities CLI
+
+# --------------------------------------------------- // Dependencies
+lua                                                    # Lua interpreter (required by Hyprland config)
+pacman-contrib                                         # Pacman utilities (checkupdates, etc.)
+parallel                                               # Parallel processing
+jq                                                     # JSON processing
+imagemagick                                            # Image processing
+qt5-imageformats                                       # Dolphin image thumbnails
+ffmpegthumbs                                           # Dolphin video thumbnails
+kde-cli-tools                                          # KDE file type defaults
+libnotify                                              # Notifications
+noto-fonts-emoji                                       # Emoji font
+luarocks                                               # Lua package manager
+
+# --------------------------------------------------- // Theming
+nwg-look                                               # GTK configuration tool
+qt5ct                                                  # Qt5 configuration tool
+qt6ct                                                  # Qt6 configuration tool
+kvantum                                                # SVG-based Qt6 theme engine
+kvantum-qt5                                            # SVG-based Qt5 theme engine
+qt5-wayland                                            # Wayland support in Qt5
+qt6-wayland                                            # Wayland support in Qt6
+
+# --------------------------------------------------- // Applications
+firefox                                                # Web browser
+kitty                                                  # Terminal emulator
+dolphin                                                # KDE file manager
+dolphin-plugins                                        # Dolphin plugins
+ark                                                    # KDE file archiver
+unzip                                                  # ZIP extraction
+vim                                                    # Terminal text editor
+code                                                   # VS Code IDE
+nwg-displays                                           # Monitor management utility
+neovim                                                 # Neovim editor
+kate                                                   # KDE file editor
+
+# --------------------------------------------------- // Terminal tools
+fastfetch                                              # System information fetch tool
+btop                                                   # System info CLI
+zsh                                                    # ZSH shell
+fzf                                                    # Command-line fuzzy finder
+bat                                                    # Enhanced cat
+eza                                                    # File lister for Zsh
