@@ -37,44 +37,33 @@ install_packages() {
 	print_log -b ""
 	print_log -stat "INSTALLING" "$category packages from $list_file"
 
-	# Read package list
+	# Read package list and build a single batch command with --needed
 	local packages=()
 	while IFS= read -r pkg; do
 		packages+=("$pkg")
 	done < <(read_package_list "$list_file")
 
-	local total=${#packages[@]}
-	local installed=0
-
-	if [[ $total -eq 0 ]]; then
+	if [[ ${#packages[@]} -eq 0 ]]; then
 		print_log -y "No packages to install in $category."
 		return 0
 	fi
 
-	for pkg in "${packages[@]}"; do
-		progress_bar "$installed" "$total"
+	# Use --needed so pacman/yay automatically skips already-installed packages
+	local cmd_args=("${packages[@]}" "--needed")
 
-		if pkg_installed "$pkg"; then
-			print_log -g "[SKIP]  " -wt "$pkg (already installed)"
+	if [[ "$helper" == "yay" ]]; then
+		if yay -S --noconfirm "${cmd_args[@]}" 2>&1; then
+			print_log -g "Done installing $category packages."
 		else
-			if [[ "$helper" == "yay" ]]; then
-				if yay -S --noconfirm "$pkg" 2>&1; then
-					print_log -g "[OK]    " -wt "$pkg"
-					installed=$((installed + 1))
-				else
-					print_log -err "[FAIL]  " -r "$pkg — Try: yay -S $pkg manually"
-				fi
-			elif sudo "$helper" -S --noconfirm "$pkg" 2>&1; then
-				print_log -g "[OK]    " -wt "$pkg"
-				installed=$((installed + 1))
-			else
-				print_log -err "[FAIL]  " -r "$pkg — Try: sudo $helper -S $pkg manually"
-			fi
+			print_log -err "[FAIL]  " -r "$category — Try: yay -S ${packages[*]} manually"
+			return 1
 		fi
-	done
-
-	progress_bar "$installed" "$total"
-	print_log -g "Done installing $category packages."
+	elif sudo pacman -S --noconfirm "${cmd_args[@]}" 2>&1; then
+		print_log -g "Done installing $category packages."
+	else
+		print_log -err "[FAIL]  " -r "$category — Try: sudo pacman -S ${packages[*]} manually"
+		return 1
+	fi
 }
 
 # --------------------------------------------------- // Dotfiles
@@ -191,16 +180,15 @@ main() {
 	read -r choice
 
 	case "$choice" in
-	1) # Full Install
-		# Packages
+	1) # Full Install — Core → Extra → AUR (so extra are available before AUR)
 		if confirm "Install core packages?"; then
 			install_packages "Core" "$SCRIPT_DIR/packages/core.lst" "pacman"
 		fi
-		if confirm "Install AUR packages?"; then
-			install_packages "AUR" "$SCRIPT_DIR/packages/aur.lst" "yay"
-		fi
 		if confirm "Install extra packages?"; then
 			install_packages "Extra" "$SCRIPT_DIR/packages/extra.lst" "pacman"
+		fi
+		if confirm "Install AUR packages?"; then
+			install_packages "AUR" "$SCRIPT_DIR/packages/aur.lst" "yay"
 		fi
 		# Dotfiles
 		if confirm "Install dotfiles, fonts, and icon theme?"; then
@@ -212,15 +200,15 @@ main() {
 		run_post_install
 		;;
 
-	2) # Packages Only
+	2) # Packages Only — Core → Extra → AUR (so extra are available before AUR)
 		if confirm "Install core packages?"; then
 			install_packages "Core" "$SCRIPT_DIR/packages/core.lst" "pacman"
 		fi
-		if confirm "Install AUR packages?"; then
-			install_packages "AUR" "$SCRIPT_DIR/packages/aur.lst" "yay"
-		fi
 		if confirm "Install extra packages?"; then
 			install_packages "Extra" "$SCRIPT_DIR/packages/extra.lst" "pacman"
+		fi
+		if confirm "Install AUR packages?"; then
+			install_packages "AUR" "$SCRIPT_DIR/packages/aur.lst" "yay"
 		fi
 		# Post-install
 		run_post_install

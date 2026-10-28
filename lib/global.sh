@@ -104,12 +104,3 @@ read_package_list() {
 		echo "$line"
 	done <"$filepath"
 }
-
-# Display a progress counter for package installation
-# Usage: progress_bar <current> <total>
-# Returns: nothing (prints to stdout)
-progress_bar() {
-	local current="$1"
-	local total="$2"
-	print_log -b "[PACKAGES] " -wt "$current/$total installed"
-}
