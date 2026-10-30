@@ -22,7 +22,7 @@ A dynamic tiling Wayland compositor. The target desktop environment for this ins
 
 ## EndeavourOS
 
-An Arch Linux-based distribution. The base OS; the install script runs on top of an already-installed EndeavourOS system.
+An Arch Linux-based distribution. The base OS; the install script runs on top of an already-installed EndeavourOS system. (Abreviated : EOS)
 
 ## Nerd Fonts
 
